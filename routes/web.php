@@ -1,11 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(ThemeController::class)->group(function(){
+    Route::get('/', 'web')->name('web');
+    Route::get('/categories', 'category')->name('categories');
+    Route::get('/contacts', 'contacts')->name('contacts');
+    Route::get('/single-blog', 'singleBlog')->name('singleBlog');
+    Route::get('/login', 'login')->name('login');
+    Route::get('/register', 'register')->name('register');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
