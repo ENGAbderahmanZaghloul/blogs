@@ -10,8 +10,8 @@ Route::controller(ThemeController::class)->group(function(){
     Route::get('/categories', 'category')->name('categories');
     Route::get('/contacts', 'contacts')->name('contacts');
     Route::get('/single-blog', 'singleBlog')->name('singleBlog');
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
+    Route::get('/login', 'login')->middleware('guest')->name('login');
+    Route::get('/register', 'register')->middleware('guest')->name('register');
 });
 
 

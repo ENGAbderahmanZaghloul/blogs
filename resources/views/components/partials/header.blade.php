@@ -4,8 +4,10 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container box_1620">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="{{ route('web') }}"><img
-                        src="{{ asset('assets') }}/img/logo.png" alt=""></a>
+                <a class="navbar-brand logo_h" href="{{ route('web') }}">
+                    {{-- <img src="{{ asset('assets') }}/img/logo.png" alt=""> --}}
+                    <h1 class="text-gray-100 font-bold text-3xl">Blogs</h1>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
@@ -38,14 +40,25 @@
                     <!-- End - Add new blog -->
 
                     <ul class="nav navbar-nav navbar-right navbar-social">
-                        <a href="#" class="btn btn-sm btn-warning">Register / Login</a>
-                        <!-- <li class="nav-item submenu dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Welcome User</a>
-            <ul class="dropdown-menu">
-              <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
-            </ul>
-          </li> -->
+                        @if (!Auth::check())
+                            <a href="{{ route('register') }}" class="btn btn-sm btn-warning">Register / Login</a>
+                        @else
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                  aria-expanded="false">{{ Auth::user()->name }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">Profile</a></li>
+                                    <li class="nav-item">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                                        </form></li>
+                                </ul>
+                            </li>
+                        @endif
+
+
+
                     </ul>
                 </div>
             </div>
