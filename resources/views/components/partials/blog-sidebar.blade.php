@@ -4,11 +4,20 @@
                       <h4 class="single-sidebar-widget__title">Newsletter</h4>
                       <div class="form-group mt-30">
                         <div class="col-autos">
-                          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = 'Enter email'">
+                            <form action="{{ route('subscriber.store') }}" method="POST">
+                                @csrf
+                                <input name="email" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter email'">
+                                    <button type="submit" class="bbtns d-block mt-3 w-100">Subcribe</button>
+                                    <span class="mt-2 text-success d-block">
+                                        {{ session('success') }}
+                                    </span>
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                            </form>
                         </div>
                       </div>
-                      <button class="bbtns d-block mt-20 w-100">Subcribe</button>
                     </div>
 
                     <div class="single-sidebar-widget post-category-widget">

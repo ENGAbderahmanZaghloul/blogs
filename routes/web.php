@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ Route::controller(ThemeController::class)->group(function(){
     Route::get('/register', 'register')->middleware('guest')->name('register');
 });
 
+Route::post('/subscribe/store', [SubscriberController::class, 'store'])->name('subscriber.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
