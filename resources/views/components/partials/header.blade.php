@@ -22,14 +22,18 @@
                         <li class="nav-item @yield('categories-active') submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                 aria-haspopup="true" aria-expanded="false">Categories</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('categories') }}">Food</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="{{ route('categories') }}">Bussiness</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('categories') }}">Travel</a>
-                                </li>
-                            </ul>
+                            @php
+                                $categories = App\Models\Category::get();
+                            @endphp
+                            @if ($categories->count()>0)
+                                <ul class="dropdown-menu">
+                                    @foreach ($categories as $category)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </li>
                         <li class="nav-item @yield('contact-active')"><a class="nav-link"
                                 href="{{ route('contacts') }}">Contact</a></li>
@@ -45,7 +49,7 @@
                         @else
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                  aria-expanded="false">{{ Auth::user()->name }}</a>
+                                    aria-expanded="false">{{ Auth::user()->name }}</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="blog-details.html">Profile</a></li>
                                     <li class="nav-item">
@@ -56,8 +60,6 @@
                                 </ul>
                             </li>
                         @endif
-
-
 
                     </ul>
                 </div>
