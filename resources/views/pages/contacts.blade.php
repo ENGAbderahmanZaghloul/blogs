@@ -33,21 +33,31 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-9">
-                    <form action="#/" class="form-contact contact_form" action="contact_process.php" method="post"
+                    <form action="{{ route('contact.store') }}" method="post" class="form-contact contact_form"
                         id="contactForm" novalidate="novalidate">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="form-group">
                                     <input class="form-control" name="name" id="name" type="text"
                                         placeholder="Enter your name">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="email" id="email" type="email"
                                         placeholder="Enter email address">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="subject" id="subject" type="text"
                                         placeholder="Enter Subject">
+                                    @error('subject')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-7">
